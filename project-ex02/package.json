@@ -2,11 +2,14 @@
   "name": "project-ex2",
   "version": "1.0.0",
   "description": "",
-  "main": "app-ex01.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "yeominji-math": "file:../yeominji-math"
+  }
 }

@@ -1,15 +1,15 @@
 {
-  "name": "project-ex01",
+  "name": "helloweb-ex01",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "yeominji-math": "file:../yeominji-math"
+    "connect": "^3.7.0",
+    "connect-route": "^0.1.5"
   }
 }
