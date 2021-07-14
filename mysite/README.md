@@ -1,8 +1,10 @@
-MySite on Node(Express)
-project manifest 파일(package.json) 생성
+# MySite on Node(Express)
+
+## project manifest 파일(package.json) 생성
 $ npm init -y
-,,,
-설치패키지
+
+## 설치패키지
+```bash
 $ npm i express
 $ npm i express-session
 $ npm i ejs
@@ -10,20 +12,24 @@ $ npm i dotenv
 $ npm i sequelize
 $ npm i mysql2
 $ npm i -D nodemon
-scripts in package.json
+```
+
+## scripts in package.json
+```JSON
 .
 .
 .
-,,,
   "scripts": {
     "start": "node index.js",
     "debug": "nodemon index.js"
   },
 .
 .
-. 
-,,,
-project structure
+.  
+```
+
+## project structure
+<pre>
 /mysite
     |--- index.js
     |--- package.json
@@ -41,3 +47,4 @@ project structure
             |--- /board
             |--- /gallery
             |--- /admin
+</pre>
