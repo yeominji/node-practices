@@ -10,7 +10,7 @@ module.exports = {
         const query = util.promisify(conn.query).bind(conn);
         try {
             return await query(
-                " select no, name, (date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date) as regDate , message from guestbook  order by  no desc ",
+                " select no, name, (date_format(reg_date, '%Y/%m/%d %H:%i:%s')  As regDate , message from guestbook  order by  no desc ",
                 []
             );
         } catch(e) {

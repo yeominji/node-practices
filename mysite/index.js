@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const http = require('http');
+const multer = require('multer');
 const path = require('path');
 const dotenv = require('dotenv');
 
@@ -10,6 +11,14 @@ dotenv.config({path: path.join(__dirname, 'config/db.env')});
 
 const mainRouter = require('./routes/main');
 const userRouter = require('./routes/user');
+const userApiRouter = require('./routes/user-api');
+const guestbookRouter = require('./routes/guestbook');
+const guestbookApiRouter = require('./routes/guestbook-api');
+const galleryRouter = require('./routes/gallery');
+const errorRouter = require('./routes/error');
+
+// Logging
+const logger = require('./logging');
 
 // Application Setup
 const application = express()
@@ -21,6 +30,10 @@ const application = express()
         resave: false,            // 요청 처리에서 세션의 변경사항이 없어도 항상 저장           
         saveUninitialized: false  // 새로 세션을 생성할 때 "uninitialized" 상태로 둔다. 따라서 로그인 세션에서는 false로 하는 것이 좋다.
     }))
+    .use(multer({
+        dest: path.join(__dirname,process.execArgv.MULTER_TAEMPORARY_STORE)
+
+    }).single('file'))
     // 3. request body parser
     .use(express.urlencoded({extended: true})) // application/x-www-form-urlencoded
     .use(express.json())                       // application/json
@@ -35,14 +48,18 @@ const application = express()
     })
     .use('/', mainRouter)
     .use('/user', userRouter)
-    .use((req, res) => res.render('error/404'));
+    .use('/guestbook', guestbookRouter)
 
-
+    .use('/api/user', userApiRouter)
+    .use('/api/guestbook', guestbookApiRouter)
+    .use('/gallery', galleryRouter)
+    .use(errorRouter.error404)
+    .use(errorRouter.error500);
 
 // Server Setup    
 http.createServer(application)
     .on('listening', function(){
-        console.info(`Http Server running on port ${process.env.PORT}`);
+        logger.info(`Http Server running on port ${process.env.PORT}`);
     })
     .on('error', function(error){
         if(error.syscall !== 'listen'){
@@ -50,11 +67,11 @@ http.createServer(application)
         }
         switch(error.code){
             case 'EACCESS':
-                console.error(`Port:${process.env.PORT} requires privileges`);
+                logger.error(`Port:${process.env.PORT} requires privileges`);
                 process.exit(1);
                 break;
             case 'EADDRINUSE':
-                console.error(`Port:${process.env.PORT} is already in use`);
+                logger.error(`Port:${process.env.PORT} is already in use`);
                 process.exit(1);
                 break;
             default:
