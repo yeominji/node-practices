@@ -1,11 +1,3 @@
-**/node_modules
-
-**/.idea
-**/.iml
-**/build/
-
-**/.classpath
-**/.project
-**/.settings/
-**/target/
-**/build/
+/logs
+/multer-temporary-store
+**/upload-images

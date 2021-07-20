@@ -1,24 +1,24 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
 module.exports = function(sequelize) {
-    return sequelize.define('guestbook', {
+    return sequelize.define('Gallery', {
         no: { 
             field: 'no',
             type: DataTypes.BIGINT(11),
             primaryKey: true,
             autoIncrement: true 
         },
-        commit: {
-            field: 'commit',
-            type: DataTypes.STRING(45),
+        comment: {
+            field: 'comment',
+            type: DataTypes.STRING(200),
             allowNull: false
         },
         url: {
             field: 'url',
-            type: DataTypes.STRING(45),
+            type: DataTypes.STRING(200),
             allowNull: false
-       
-    }, 
+        }
+    }, {
         underscored: true,    
         freezeTableName: true,
         timestamps: true,

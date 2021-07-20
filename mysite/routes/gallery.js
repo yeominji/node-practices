@@ -1,9 +1,10 @@
 const express = require('express');
-const controller = require('../controllers/gallery);
+const authorized = require('./authorized');
+const controller = require('../controllers/gallery');
 
 const router = express.Router();
 router.route('').get(controller.index);
-//router.route('/delete').get(controller.delete);
-//router.route('/add').post(controller.add);
+router.route('/upload').post(authorized('ADMIN'), controller.upload);
+router.route('/delete/:no').get(authorized('ADMIN'), controller.delete);
 
 module.exports = router;
